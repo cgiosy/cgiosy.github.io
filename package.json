@@ -1,10 +1,10 @@
 {
-  "name": "gatsby-starter-advanced",
-  "description": "GatsbyJS starter that includes examples for advanced use cases.",
-  "version": "1.1.0",
-  "author": "Ruben Harutyunyan <vagr9k@gmail.com>",
+  "name": "cgiosy.github.io",
+  "description": "My blog",
+  "version": "0.0.1",
+  "author": "cgiosy <cgiosy@kakao.com>",
   "dependencies": {
-    "gatsby": "^2.15.28",
+    "gatsby": "^2.18.14",
     "gatsby-image": "^2.2.23",
     "gatsby-plugin-catch-links": "^2.1.12",
     "gatsby-plugin-feed": "^2.3.15",
@@ -46,7 +46,7 @@
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
-    "gh-pages": "^2.0.1",
+    "gh-pages": "^2.1.1",
     "prettier": "^1.17.0",
     "remark-cli": "^7.0.0",
     "remark-preset-lint-recommended": "^3.0.2",
@@ -61,6 +61,7 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
+    "depoly": "gatsby build && gh-pages -d public -b master",
     "develop": "gatsby develop",
     "dev": "npm run develop",
     "serve": "gatsby serve",
