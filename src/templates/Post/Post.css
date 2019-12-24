@@ -1,0 +1,25 @@
+.post-container {
+  min-height: 100%;
+  width: 100%;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-container > * {
+  width: 100%;
+}
+
+.post-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.post-content a:hover {
+  text-decoration: underline;
+}

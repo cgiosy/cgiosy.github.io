@@ -1,0 +1,41 @@
+.pagination-container {
+  display: flex;
+  width: 100%;
+  padding: 1em;
+  justify-content: space-evenly;
+}
+
+.pagination-item {
+  display: inline-flex;
+  position: relative;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  /* border: 1px solid #a0a0a0; */
+  box-shadow: 0 0 .3em black;
+  color: black;
+  font-size: 0.8em;
+  text-decoration: none;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-item::before {
+  content: '';
+  position: absolute;
+  top: -1.5em;
+  left: -1.5em;
+  width: 6em;
+  height: 6em;
+  background: url(/images/circle_black.png);
+  background-size: cover;
+  opacity: 0;
+  transform: rotateZ(45deg);
+  transition: opacity .25s, transform .25s;
+}
+
+.pagination-selected::before, .pagination-item:hover::before {
+  opacity: 1;
+  transform: rotateZ(90deg);
+}

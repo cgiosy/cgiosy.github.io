@@ -7,26 +7,24 @@ const siteConfig = require("./data/SiteConfig");
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
-  let slug;
+  let slug = "/posts";
   if (node.internal.type === "MarkdownRemark") {
     const fileNode = getNode(node.parent);
     const parsedFilePath = path.parse(fileNode.relativePath);
-    if (
-      Object.prototype.hasOwnProperty.call(node, "frontmatter") &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, "title")
-    ) {
-      slug = `/${_.kebabCase(node.frontmatter.title)}`;
-    } else if (parsedFilePath.name !== "index" && parsedFilePath.dir !== "") {
-      slug = `/${parsedFilePath.dir}/${parsedFilePath.name}/`;
-    } else if (parsedFilePath.dir === "") {
-      slug = `/${parsedFilePath.name}/`;
-    } else {
-      slug = `/${parsedFilePath.dir}/`;
-    }
 
     if (Object.prototype.hasOwnProperty.call(node, "frontmatter")) {
-      if (Object.prototype.hasOwnProperty.call(node.frontmatter, "slug"))
-        slug = `/${_.kebabCase(node.frontmatter.slug)}`;
+      if (Object.prototype.hasOwnProperty.call(node.frontmatter, "slug")) {
+        slug += `/${_.kebabCase(node.frontmatter.slug)}`;
+      } else if (Object.prototype.hasOwnProperty.call(node.frontmatter, "title")) {
+        slug += `/${_.kebabCase(node.frontmatter.title)}`;
+      } else if (parsedFilePath.dir === "") {
+        slug += `/${parsedFilePath.name}/`;
+      } else if (parsedFilePath.name === "index") {
+        slug += `/${parsedFilePath.dir}/`;
+      } else {
+        slug += `/${parsedFilePath.dir}/${parsedFilePath.name}/`;
+      }
+
       if (Object.prototype.hasOwnProperty.call(node.frontmatter, "date")) {
         const date = moment(node.frontmatter.date, siteConfig.dateFromFormat);
         if (!date.isValid)
@@ -41,10 +39,11 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  const postPage = path.resolve("src/templates/post.jsx");
-  const tagPage = path.resolve("src/templates/tag.jsx");
-  const categoryPage = path.resolve("src/templates/category.jsx");
-  const listingPage = path.resolve("./src/templates/listing.jsx");
+  const Posts = path.resolve("./src/templates/Posts/Posts.jsx");
+  const Post = path.resolve("src/templates/Post/Post.jsx");
+  const About = path.resolve("src/templates/About/About.jsx");
+  const Tag = path.resolve("src/templates/Tag/Tag.jsx");
+  const Tags = path.resolve("src/templates/Tags/Tags.jsx");
 
   // Get a full list of markdown posts
   const markdownQueryResult = await graphql(`
@@ -58,7 +57,6 @@ exports.createPages = async ({ graphql, actions }) => {
             frontmatter {
               title
               tags
-              category
               date
             }
           }
@@ -72,8 +70,7 @@ exports.createPages = async ({ graphql, actions }) => {
     throw markdownQueryResult.errors;
   }
 
-  const tagSet = new Set();
-  const categorySet = new Set();
+  const tagSet = {};
 
   const postsEdges = markdownQueryResult.data.allMarkdownRemark.edges;
 
@@ -95,35 +92,63 @@ exports.createPages = async ({ graphql, actions }) => {
     return 0;
   });
 
-  // Paging
+  // Posts
   const { postsPerPage } = siteConfig;
   const pageCount = Math.ceil(postsEdges.length / postsPerPage);
 
+  createPage({
+    path: "/",
+    component: Posts,
+    context: {
+      isRoot: true,
+      limit: postsPerPage,
+      skip: 0,
+      pageCount,
+      currentPage: 1
+    }
+  });
+
+  createPage({
+    path: "/posts",
+    component: Posts,
+    context: {
+      limit: postsPerPage,
+      skip: 0,
+      pageCount,
+      currentPage: 1
+    }
+  });
+
   [...Array(pageCount)].forEach((_val, pageNum) => {
     createPage({
-      path: pageNum === 0 ? `/` : `/${pageNum + 1}/`,
-      component: listingPage,
+      path: `/posts/${pageNum + 1}/`,
+      component: Posts,
       context: {
         limit: postsPerPage,
         skip: pageNum * postsPerPage,
         pageCount,
-        currentPageNum: pageNum + 1
+        currentPage: pageNum + 1
       }
     });
   });
 
   // Post page creating
   postsEdges.forEach((edge, index) => {
+    const date = moment(
+      edge.node.frontmatter.date,
+      siteConfig.dateFromFormat
+    );
+
     // Generate a list of tags
     if (edge.node.frontmatter.tags) {
       edge.node.frontmatter.tags.forEach(tag => {
-        tagSet.add(tag);
+        const info = tagSet[tag] || { count: 0 };
+        info.count += 1;
+        if (!info.updated || info.updated.isBefore(date)) {
+          info.updated = date;
+        }
+        tagSet[tag] = info;
       });
-    }
-
-    // Generate a list of categories
-    if (edge.node.frontmatter.category) {
-      categorySet.add(edge.node.frontmatter.category);
     }
 
     // Create post pages
@@ -134,7 +159,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     createPage({
       path: edge.node.fields.slug,
-      component: postPage,
+      component: Post,
       context: {
         slug: edge.node.fields.slug,
         nexttitle: nextEdge.node.frontmatter.title,
@@ -145,21 +170,31 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  //  Create tag pages
-  tagSet.forEach(tag => {
-    createPage({
-      path: `/tags/${_.kebabCase(tag)}/`,
-      component: tagPage,
-      context: { tag }
-    });
+  // About
+  createPage({
+    path: "/about",
+    component: About
   });
 
-  // Create category pages
-  categorySet.forEach(category => {
-    createPage({
-      path: `/categories/${_.kebabCase(category)}/`,
-      component: categoryPage,
-      context: { category }
-    });
+  //  Create tag pages
+  createPage({
+    path: `/tags`,
+    component: Tags,
+    context: {
+      tagSet
+    }
   });
+
+  for (const tag in tagSet) {
+    const { count, updated } = tagSet[tag];
+    createPage({
+      path: `/tags/${_.kebabCase(tag)}/`,
+      component: Tag,
+      context: {
+        tag,
+        count,
+        updated
+      }
+    });
+  }
 };

@@ -1,0 +1,45 @@
+.post-list-item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2em 1em;
+}
+
+.post-list-item:not(:last-child) {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.post-list-item > .post-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.post-list-item > .post-title::before, .post-list-item > .post-title::after {
+  content: '';
+  min-width: calc(99 / 72 * 1em);
+  height: 1em;
+  margin-bottom: -.15em;
+  background: url(/images/pointer_black.png);
+  background-size: cover;
+  opacity: 0;
+  transition: transform .25s, opacity .25s;
+}
+
+.post-list-item > .post-title::before {
+  transform: rotateX(90deg);
+}
+.post-list-item > .post-title::after {
+  transform: rotateX(90deg) scaleX(-1);
+}
+
+.post-list-item:hover > .post-title::before {
+  transform: rotateX(0deg);
+  opacity: 1;
+}
+.post-list-item:hover > .post-title::after {
+  transform: rotateX(0deg) scaleX(-1);
+  opacity: 1;
+}

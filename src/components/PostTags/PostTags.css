@@ -1,0 +1,8 @@
+.post-tag-container {
+  padding: 1em 0;
+}
+.post-tag-container::before {
+  content: '태그:';
+  padding-right: .5em;
+  vertical-align: middle;
+}

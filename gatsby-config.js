@@ -32,7 +32,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "posts",
-        path: `${__dirname}/content/`
+        path: `${__dirname}/posts/`
       }
     },
     {
@@ -112,7 +112,7 @@ module.exports = {
         setup(ref) {
           const ret = ref.query.site.siteMetadata.rssMetadata;
           ret.allMarkdownRemark = ref.query.allMarkdownRemark;
-          ret.generator = "GatsbyJS Advanced Starter";
+          ret.generator = "cgiosy.github.io - 언제나 뉴비";
           return ret;
         },
         query: `
@@ -167,7 +167,6 @@ module.exports = {
                       title
                       cover
                       date
-                      category
                       tags
                     }
                   }
