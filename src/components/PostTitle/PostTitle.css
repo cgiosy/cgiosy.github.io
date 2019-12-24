@@ -1,9 +1,0 @@
-.post-title {
-  color: black;
-  font-family: /* 'Playfair Display', */ 'Noto Serif KR', serif;
-  font-weight: 500;
-}
-
-a:hover .post-title {
- /* text-decoration: underline; */
-}
