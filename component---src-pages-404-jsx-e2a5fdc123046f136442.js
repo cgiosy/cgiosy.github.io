@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{pssB:function(e,n,t){"use strict";t.r(n);var a=t("q1tI"),l=t.n(a),o=t("TJpk"),c=t.n(o),s=t("hpys"),u=t("IpnI"),i=t.n(u);t("aCqz");n.default=function(){return l.a.createElement(s.a,null,l.a.createElement(c.a,{title:"404 Not Found | "+i.a.siteTitle}),l.a.createElement("div",{className:"notfound-container"},l.a.createElement("h1",null,"404 Not Found"),l.a.createElement("section",null,"주소가 잘못되었거나 삭제된 페이지인 것 같아요! 다른 글을 보시는 건 어떨까요?")))}}}]);
+//# sourceMappingURL=component---src-pages-404-jsx-e2a5fdc123046f136442.js.map
