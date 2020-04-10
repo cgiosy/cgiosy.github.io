@@ -3,14 +3,17 @@
 <url> <loc>https://cgiosy.github.io/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/posts</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/posts/1/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://cgiosy.github.io/posts/lis</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/posts/2020-구데기컵-참가-후기</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/posts/boj-18342-순례의-시작</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/posts/boj-18253-최단경로와-쿼리</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/posts/제-2-회-id-tcup-참가-후기</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/posts/2020-년-목표</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/posts/c-c-의-입출력-방식-정리-그리고-fast-io</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://cgiosy.github.io/posts/메모</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/about</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/tags</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://cgiosy.github.io/tags/강좌/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/tags/boj/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/tags/대회/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/tags/풀이/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -18,4 +21,5 @@
 <url> <loc>https://cgiosy.github.io/tags/잡담/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/tags/목표/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://cgiosy.github.io/tags/최적화/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://cgiosy.github.io/tags/메모/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
